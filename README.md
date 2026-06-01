@@ -61,6 +61,38 @@ cd Pebble-Icon-Theme
 
 Once the installation is complete, open **GNOME Tweaks** (or your respective desktop environment's appearance settings) and select "Pebble" or one of its color variants to apply the theme.
 
+### 🐧 NixOS / Home Manager (Declarative)
+
+For NixOS users, the theme is available as a Nix flake, allowing fully declarative installation without manual scripting.
+
+**Add to your flake inputs:**
+```nix
+inputs.pebble-icons.url = "github:abhijeetshewale05/Pebble-Icon-Theme";
+```
+
+**Install via Home Manager:**
+```nix
+{ inputs, pkgs, ... }:
+{
+  gtk.iconTheme = {
+    package = inputs.pebble-icons.packages.${pkgs.system}.pebble-purple;
+    name    = "Pebble-Purple";
+  };
+}
+```
+
+Available variants: `pebble`, `pebble-blue`, `pebble-green`, `pebble-orange`, `pebble-pink`, `pebble-purple`, `pebble-red`, `pebble-slate`, `pebble-teal`, `pebble-yaru`, `pebble-yellow`. Use `all` to install every variant at once.
+
+**Or via NixOS configuration:**
+```nix
+{ inputs, pkgs, ... }:
+{
+  environment.systemPackages = [
+    inputs.pebble-icons.packages.${pkgs.system}.pebble-purple
+  ];
+}
+```
+
 ## 🚀 Roadmap & Availability
 * Expanding icon coverage for missing third-party Linux applications.
 * Future optimizations and dedicated support for KDE Plasma.
